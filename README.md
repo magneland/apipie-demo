@@ -25,12 +25,11 @@ To test that it works we can use `curl` to see it working:
 
     curl -H "Content-Type: application/json" -X POST\
          -d '{"user":{"name":"admin"}}'\
-          http://localhost:3000/users
+          http://localhost:3000/api/v2/users
 
     curl -H "Content-Type: application/json" -X POST\
-         -d '{"tweet":{"text":"Hurray, I've survived",
-                       "scheduled_at":"2012-12-22T01:00"}}'\
-          http://localhost:3000/users/1/tweets
+         -d '{"tweet":{"text":"Hurray, I have survived","scheduled_at":"2012-12-22T01:00"}}'\
+          http://localhost:3000/api/v2/users/1/tweets
 
 ### Api Doc In 1 Minute
 
@@ -43,7 +42,7 @@ gem 'apipie-rails'
 
 Then set up the basic configuration:
 
-    rails g apipie:install --api_path ""
+    rails generate apipie:install --api_path ""
 
 Although we have no documentation yet, `routes.rb` and our tests
 already contain very interesting information. All we need is to put it
@@ -52,11 +51,10 @@ into one place. And Apipie provides a way how to do it:
     APIPIE_RECORD=params rake test:functionals
     APIPIE_RECORD=examples rake test:functionals
 
-CONGRATULATION!!! You've just created the fist cut documentation of
+CONGRATULATIONS!!! You've just created the first cut documentation of
 your API.
 
-When we open the `TweetsController` we can see, that out of sudden
-there is a description of every action. And more then that: the tool
+When we open the `TweetsController` we can see that there is a description of every action. Moreover: the tool
 also tried to recognize the type of params if possible (such as the
 `sent` param is `:bool`).
 
@@ -66,7 +64,7 @@ You might notice that besides the params descriptions there are also
 examples available in the documentation, although they are not in the
 source code. Apipie uses separate file `doc/apipie_examples.yml`.
 That make the code more readable (the examples can really be
-disturbing) and also makes it easier to regenerate the examples again
+distracting) and also makes it easier to regenerate the examples again
 and again.
 
 ### Time To Share
